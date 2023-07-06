@@ -1,0 +1,6 @@
+install ansiblesudo 
+apt-add-repository ppa:ansible/ansible
+sudo apt update
+sudo apt install ansible
+setting up inventory file 
+sudo vim /etc/ansible/hosts
