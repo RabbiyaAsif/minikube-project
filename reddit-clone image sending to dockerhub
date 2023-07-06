@@ -8,7 +8,3 @@ git clone
 create DockerFile
 login to dockerhub and create repo
 docker build . -t reponame
-
-send the code from jenkins server to docker server then build the image from Dockerfile and send the image to Docker hub.
-launch minikube server and create manifest to deploy the code
-launch ansible server and install ansible and configure it and make playbook which will running kubectl command on minikube
