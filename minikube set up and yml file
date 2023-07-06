@@ -1,0 +1,53 @@
+# Steps:-
+
+# For Docker Installation
+sudo apt-get update
+sudo apt-get install docker.io -y
+sudo usermod -aG docker $USER && newgrp docker
+
+# For Minikube & Kubectl
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube 
+
+sudo snap install kubectl --classic
+minikube start --driver=docker
+FOR YML FILE:
+deployment.yml: // https://trainwithshubham.hashnode.dev/prerequisite-for-deployment-of-a-reddit-copy-on-kubernetes-with-ingress-enabled
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reddit-clone-deployment
+  labels:
+    app: reddit-clone
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reddit-clone
+  template:
+    metadata:
+      labels:
+        app: reddit-clone
+    spec:
+      containers:
+      - name: reddit-clone
+        image: trainwithshubham/reddit-clone
+        ports:
+        - containerPort: 3000
+Service.yml:
+apiVersion: v1
+kind: Service
+metadata:
+  name: reddit-clone-service
+  labels:
+    app: reddit-clone
+spec:
+  type: NodePort
+  ports:
+  - port: 3000
+    targetPort: 3000
+    nodePort: 31000
+  selector:
+    app: reddit-clone
+to apply:
+kubectl apply -f menifest name
